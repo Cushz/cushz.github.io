@@ -1,0 +1,14 @@
+{%- comment -%}
+  Localized date. Jekyll's `date` filter only knows English month names, so
+  the month is looked up in _data/i18n.yml.
+    include.date — a date object
+    include.lang — "az" | "en"
+{%- endcomment -%}
+{%- assign _t = site.data.i18n[include.lang] -%}
+{%- assign _mi = include.date | date: "%-m" | minus: 1 -%}
+{%- assign _month = _t.months[_mi] -%}
+{%- if include.lang == "en" -%}
+{{ _month }} {{ include.date | date: "%-d, %Y" }}
+{%- else -%}
+{{ include.date | date: "%-d" }} {{ _month }} {{ include.date | date: "%Y" }}
+{%- endif -%}

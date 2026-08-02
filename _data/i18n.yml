@@ -1,0 +1,51 @@
+# UI strings per language. Technical terminology deliberately stays in
+# English in the Azerbaijani strings (exploit development, reverse
+# engineering, Windows internals, kernel, shellcode …).
+
+az:
+  name: Azərbaycanca
+  short: AZ
+  title: "Exploitation günlükləri"
+  title_lead: "Exploitation"
+  title_trail: "günlükləri"
+  tagline: "Exploit development, reverse engineering və Windows internals haqqında yazılar."
+  description: "Exploitation Diaries — Arif Abdullayev (cushz) tərəfindən exploit development, reverse engineering və Windows internals haqqında texniki yazılar."
+  skip: "Məzmuna keç"
+  nav_writing: "Yazılar"
+  hero_cta: "Yazıları oxu"
+  section_writing: "Yazılar"
+  section_topics: "Mövzular"
+  post_word: "yazı"
+  read: "Oxu"
+  no_posts: "Hələ yazı yoxdur."
+  elsewhere: "Digər səhifələr"
+  built_with: "Jekyll ilə hazırlanıb"
+  originally_published_pre: "İlk dəfə"
+  originally_published_post: "saytında dərc olunub."
+  back_all: "Bütün yazılar"
+  lang_label: "Dil"
+  months: [yanvar, fevral, mart, aprel, may, iyun, iyul, avqust, sentyabr, oktyabr, noyabr, dekabr]
+
+en:
+  name: English
+  short: EN
+  title: "Exploitation Diaries"
+  title_lead: "Exploitation"
+  title_trail: "Diaries"
+  tagline: "Exploit development, reverse engineering and Windows internals."
+  description: "Exploitation Diaries — write-ups on exploit development, reverse engineering and Windows internals by Arif Abdullayev (cushz)."
+  skip: "Skip to content"
+  nav_writing: "Writing"
+  hero_cta: "Read the write-ups"
+  section_writing: "Writing"
+  section_topics: "Topics"
+  post_word: "posts"
+  read: "Read"
+  no_posts: "No posts yet."
+  elsewhere: "Elsewhere"
+  built_with: "Built with Jekyll"
+  originally_published_pre: "Originally published on"
+  originally_published_post: ""
+  back_all: "All write-ups"
+  lang_label: "Language"
+  months: [January, February, March, April, May, June, July, August, September, October, November, December]

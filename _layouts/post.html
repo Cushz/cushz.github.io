@@ -1,0 +1,34 @@
+---
+layout: default
+---
+{%- assign lang = page.lang | default: site.lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign home_url = "/" -%}{%- if lang == "en" -%}{%- assign home_url = "/en/" -%}{%- endif -%}
+
+<article class="post h-entry">
+  <div class="shell shell-narrow">
+    <header class="post-header">
+      <p class="eyebrow"><a href="{{ home_url | relative_url }}">{{ t.nav_writing }}</a>{% if page.categories.size > 0 %} <span class="dot" aria-hidden="true">/</span> {{ page.categories | join: ', ' }}{% endif %}</p>
+      <h1 class="post-title p-name">{{ page.title | escape }}</h1>
+      <p class="post-meta">
+        <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}">{% include localized-date.html date=page.date lang=lang %}</time>
+        <span class="dot" aria-hidden="true">/</span>
+        <span>{{ page.author | default: site.author }}</span>
+      </p>
+      {%- if page.tags.size > 0 %}
+      <p class="tags">{% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</p>
+      {%- endif %}
+    </header>
+
+    <div class="content e-content">
+      {{ content }}
+    </div>
+
+    <footer class="post-footer">
+      {%- if page.canonical_url %}
+      <p class="muted">{{ t.originally_published_pre }} <a href="{{ page.canonical_url }}" rel="canonical noopener">Medium</a>{% if t.originally_published_post != "" %} {{ t.originally_published_post }}{% else %}.{% endif %}</p>
+      {%- endif %}
+      <a class="btn" href="{{ home_url | relative_url }}">&larr; {{ t.back_all }}</a>
+    </footer>
+  </div>
+</article>
