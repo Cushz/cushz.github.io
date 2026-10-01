@@ -4,13 +4,15 @@ layout: default
 {%- assign lang = page.lang | default: site.lang -%}
 {%- assign t = site.data.i18n[lang] -%}
 {%- assign home_url = "/" -%}{%- if lang == "en" -%}{%- assign home_url = "/en/" -%}{%- endif -%}
+{%- assign minutes = content | number_of_words | divided_by: 200 | at_least: 1 -%}
 
 <article class="post">
   <header class="post-header">
+    <p class="eyebrow"><a href="{{ home_url | relative_url }}">&larr; {{ t.back_all }}</a></p>
     <h1>{{ page.title | escape }}</h1>
     <p class="meta">
       <time datetime="{{ page.date | date_to_xmlschema }}">{% include localized-date.html date=page.date lang=lang %}</time>
-      {%- if page.categories.size > 0 %} · {{ page.categories | join: ', ' }}{% endif %}
+      {%- if page.categories.size > 0 %} · {{ page.categories | join: ', ' }}{% endif %} · {{ minutes }} {{ t.min_read }}
     </p>
   </header>
 

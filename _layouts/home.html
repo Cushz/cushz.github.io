@@ -5,24 +5,40 @@ layout: default
 {%- assign t = site.data.i18n[lang] -%}
 {%- assign posts = site.posts | where: "lang", lang -%}
 
-<section class="intro">
+<section class="hero">
+  <p class="eyebrow">{{ site.author }} &middot; {{ site.author_handle }}</p>
   <h1>{{ t.title }}</h1>
   <p class="tagline">{{ t.tagline }}</p>
   {%- if content != empty %}
-  {{ content }}
+  <div class="hero-text">{{ content }}</div>
   {%- endif %}
 </section>
 
-<section aria-labelledby="writing">
-  <h2 id="writing" class="label">{{ t.section_writing }}</h2>
-  <ul class="post-list">
-    {%- for post in posts %}
-    <li>
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
-      <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-    </li>
-    {%- else %}
-    <li>{{ t.no_posts }}</li>
-    {%- endfor %}
-  </ul>
+<section class="writing" aria-labelledby="writing">
+  <h2 id="writing" class="label">{{ t.section_writing }} <span>({{ posts.size }})</span></h2>
+
+  {%- assign years = posts | group_by_exp: "p", "p.date | date: '%Y'" -%}
+  {%- for year in years %}
+  <div class="year">
+    <h3 class="year-label">{{ year.name }}</h3>
+    <ul class="post-list">
+      {%- for post in year.items %}
+      {%- assign minutes = post.content | number_of_words | divided_by: 200 | at_least: 1 -%}
+      <li>
+        <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        {%- assign summary = post.description | default: post.excerpt | strip_html | normalize_whitespace -%}
+        {%- if summary != "" %}
+        <p class="summary">{{ summary | truncate: 150 }}</p>
+        {%- endif %}
+        <p class="meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{% include localized-date.html date=post.date lang=lang %}</time>
+          {%- if post.categories.size > 0 %} · {{ post.categories | join: ', ' }}{% endif %} · {{ minutes }} {{ t.min_read }}
+        </p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- else %}
+  <p>{{ t.no_posts }}</p>
+  {%- endfor %}
 </section>

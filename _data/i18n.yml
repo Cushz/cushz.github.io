@@ -16,6 +16,7 @@ az:
   originally_published_pre: "İlk dəfə"
   originally_published_post: "saytında dərc olunub."
   back_all: "Bütün yazılar"
+  min_read: "dəq oxu"
   months: [yanvar, fevral, mart, aprel, may, iyun, iyul, avqust, sentyabr, oktyabr, noyabr, dekabr]
 
 en:
@@ -32,4 +33,5 @@ en:
   originally_published_pre: "Originally published on"
   originally_published_post: ""
   back_all: "All write-ups"
+  min_read: "min read"
   months: [January, February, March, April, May, June, July, August, September, October, November, December]

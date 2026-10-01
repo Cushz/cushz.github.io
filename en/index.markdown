@@ -5,6 +5,7 @@ permalink: /en/
 alt_url: /
 ---
 
-Hi, I am Arif — also known as **cushz**. I like to share what I learn, especially
-in my native language. Here I publish long-form technical write-ups on kernel
-exploitation, mitigation bypasses and reverse engineering, taken step by step.
+Hi! I'm Arif, better known online as **cushz**. This is where I write
+about what I learn in kernel exploitation, mitigation bypasses and
+reverse engineering, one step at a time and in plain language. Every
+post is also available in Azerbaijani, my native language.

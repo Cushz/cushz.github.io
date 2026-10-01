@@ -40,8 +40,23 @@
 
   <div class="page">
     <header class="site-header">
-      <a class="wordmark" href="{{ home_url | relative_url }}">{{ t.title }}</a>
-      <a class="lang" href="{{ alt_url | relative_url }}" lang="{{ alt_lang }}" hreflang="{{ alt_lang }}" aria-label="{{ alt_t.name }}">{{ alt_t.short }}</a>
+      <a class="brand" href="{{ home_url | relative_url }}" aria-label="{{ t.title }}">
+        <svg class="brand-mark" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true" focusable="false">
+          <rect width="32" height="32" fill="currentColor"/>
+          <path d="M10 11l5 5-5 5M17 21h5" fill="none" stroke="var(--bg)" stroke-width="2.6"/>
+        </svg>
+        <span>{{ site.author_handle }}</span>
+      </a>
+
+      <nav class="site-nav" aria-label="{{ t.elsewhere }}">
+        <a href="{{ site.portfolio_url }}" rel="noopener">Portfolio</a>
+        <a href="https://github.com/{{ site.github_username }}" rel="me noopener">GitHub</a>
+        <a href="{{ site.medium_url }}" rel="me noopener">Medium</a>
+        <span class="lang-switch">
+          <span aria-current="true">{{ t.short }}</span>
+          <a href="{{ alt_url | relative_url }}" lang="{{ alt_lang }}" hreflang="{{ alt_lang }}" aria-label="{{ alt_t.name }}">{{ alt_t.short }}</a>
+        </span>
+      </nav>
     </header>
 
     <main id="main">
@@ -50,11 +65,7 @@
 
     <footer class="site-footer">
       <span>&copy; {{ site.time | date: '%Y' }} {{ site.author }}</span>
-      <nav aria-label="{{ t.elsewhere }}">
-        <a href="{{ site.portfolio_url }}" rel="noopener">Portfolio</a>
-        <a href="https://github.com/{{ site.github_username }}" rel="me noopener">GitHub</a>
-        <a href="{{ site.medium_url }}" rel="me noopener">Medium</a>
-      </nav>
+      <span>{{ t.title }}</span>
     </footer>
   </div>
 </body>
