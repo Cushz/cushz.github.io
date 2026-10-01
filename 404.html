@@ -2,8 +2,9 @@
 permalink: /404.html
 layout: default
 ---
+{%- assign t = site.data.i18n[site.lang] -%}
 
-<section class="hero">
-  <h1>404</h1>
-  <p class="tagline">{{ site.data.i18n[site.lang].not_found }} <a href="{{ '/' | relative_url }}">&larr; {{ site.data.i18n[site.lang].back_all }}</a></p>
+<section class="box">
+  <h1 class="bar">&raquo; {{ t.error }} 404</h1>
+  <p class="stats">{{ t.not_found }} <a href="{{ '/' | relative_url }}">&laquo; {{ t.back_all }}</a></p>
 </section>
