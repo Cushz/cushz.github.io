@@ -19,8 +19,6 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Exploitation Diaries
-title_lead: Exploitation      # rendered white in the logo lockup
-title_trail: Diaries          # rendered grey in the logo lockup
 lang: az          # default language; UI strings live in _data/i18n.yml
 author: Arif Abdullayev
 author_handle: cushz

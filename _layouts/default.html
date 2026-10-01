@@ -2,98 +2,60 @@
 {%- assign t = site.data.i18n[lang] -%}
 {%- assign alt_lang = "en" -%}{%- if lang == "en" -%}{%- assign alt_lang = "az" -%}{%- endif -%}
 {%- assign alt_t = site.data.i18n[alt_lang] -%}
+{%- assign home_url = "/" -%}{%- if lang == "en" -%}{%- assign home_url = "/en/" -%}{%- endif -%}
 {%- comment -%} counterpart page in the other language {%- endcomment -%}
 {%- assign alt_url = page.alt_url -%}
 {%- if page.ref -%}
   {%- assign sibling = site.posts | where: "ref", page.ref | where_exp: "p", "p.lang != page.lang" | first -%}
   {%- if sibling -%}{%- assign alt_url = sibling.url -%}{%- endif -%}
 {%- endif -%}
+{%- unless alt_url -%}{%- if alt_lang == "en" -%}{%- assign alt_url = "/en/" -%}{%- else -%}{%- assign alt_url = "/" -%}{%- endif -%}{%- endunless -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
-  <title>{% if page.title %}{{ page.title | strip_html }} — {{ t.title }}{% else %}{{ t.title }} — {{ t.tagline }}{% endif %}</title>
+  <meta name="color-scheme" content="light">
+  <title>{% if page.title %}{{ page.title | strip_html }} — {{ t.title }}{% else %}{{ t.title }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: t.description | strip_html | normalize_whitespace | truncate: 160 }}">
   {%- if page.canonical_url %}
   <link rel="canonical" href="{{ page.canonical_url }}">
   {%- endif %}
-  {%- if alt_url %}
   <link rel="alternate" hreflang="{{ alt_lang }}" href="{{ alt_url | relative_url }}">
   <link rel="alternate" hreflang="{{ lang }}" href="{{ page.url | relative_url }}">
-  {%- endif %}
 
   <meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
-  <meta property="og:title" content="{{ page.title | default: site.title | strip_html }}">
+  <meta property="og:title" content="{{ page.title | default: t.title | strip_html }}">
   <meta property="og:description" content="{{ page.description | default: t.description | strip_html | normalize_whitespace | truncate: 160 }}">
   <meta property="og:locale" content="{% if lang == 'az' %}az_AZ{% else %}en_US{% endif %}">
-  <meta name="twitter:card" content="summary">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300..700&family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&family=JetBrains+Mono:wght@400;600&display=swap">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23000'/><rect x='1.5' y='1.5' width='29' height='29' rx='6' fill='none' stroke='%23374151' stroke-width='2'/><path d='M11 12l5 4-5 4' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/><path d='M18.5 20.5h4' stroke='%239ca3af' stroke-width='2.6' stroke-linecap='round'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23100f0f'/><path d='M10 11l5 5-5 5M17 21h5' fill='none' stroke='%23fffcf0' stroke-width='2.6'/></svg>">
 </head>
 <body>
   <a class="skip-link" href="#main">{{ t.skip }}</a>
 
-  <header class="site-header">
-    <div class="shell site-header-inner">
-      <a class="logo" href="{{ site.data.langs[lang].home | default: '/' | relative_url }}" aria-label="{{ t.title }}">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" width="30" height="30" focusable="false">
-            <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="7" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.55"/>
-            <path d="M10.5 11.5l5.2 4.5-5.2 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18.4 20.5h4.2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.55"/>
-          </svg>
-        </span>
-        <span class="logo-type">
-          <span class="logo-lead">{{ t.title_lead }}</span> <span class="logo-trail">{{ t.title_trail }}</span>
-        </span>
-      </a>
+  <div class="page">
+    <header class="site-header">
+      <a class="wordmark" href="{{ home_url | relative_url }}">{{ t.title }}</a>
+      <a class="lang" href="{{ alt_url | relative_url }}" lang="{{ alt_lang }}" hreflang="{{ alt_lang }}" aria-label="{{ alt_t.name }}">{{ alt_t.short }}</a>
+    </header>
 
-      <div class="header-right">
-        <nav class="site-nav" aria-label="{{ t.nav_writing }}">
-          <a href="{% if lang == 'en' %}{{ '/en/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}"{% if page.layout == 'home' %} aria-current="page"{% endif %}>{{ t.nav_writing }}</a>
-        </nav>
+    <main id="main">
+      {{ content }}
+    </main>
 
-        <div class="lang-switch" role="group" aria-label="{{ t.lang_label }}">
-          <span class="lang-current" aria-current="true">{{ t.short }}</span>
-          {%- if alt_url %}
-          <a class="lang-alt" href="{{ alt_url | relative_url }}" lang="{{ alt_lang }}" hreflang="{{ alt_lang }}">{{ alt_t.short }}</a>
-          {%- else %}
-          <a class="lang-alt" href="{% if alt_lang == 'en' %}{{ '/en/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}" lang="{{ alt_lang }}" hreflang="{{ alt_lang }}">{{ alt_t.short }}</a>
-          {%- endif %}
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-    {{ content }}
-  </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-grid">
-      <div class="footer-brand">
-        <p class="footer-title">{{ t.title }}</p>
-        <p class="muted">{{ t.tagline }}</p>
-      </div>
-
-      <div class="footer-col">
-        <p class="footer-heading">{{ t.elsewhere }}</p>
+    <footer class="site-footer">
+      <span>&copy; {{ site.time | date: '%Y' }} {{ site.author }}</span>
+      <nav aria-label="{{ t.elsewhere }}">
         <a href="{{ site.portfolio_url }}" rel="noopener">Portfolio</a>
         <a href="https://github.com/{{ site.github_username }}" rel="me noopener">GitHub</a>
         <a href="{{ site.medium_url }}" rel="me noopener">Medium</a>
-      </div>
-    </div>
-
-    <div class="shell footer-base">
-      <p class="muted">&copy; {{ site.time | date: '%Y' }} {{ site.author }}</p>
-      <p class="muted">{{ t.built_with }}</p>
-    </div>
-  </footer>
+      </nav>
+    </footer>
+  </div>
 </body>
 </html>

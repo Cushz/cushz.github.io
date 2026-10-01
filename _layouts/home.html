@@ -5,67 +5,24 @@ layout: default
 {%- assign t = site.data.i18n[lang] -%}
 {%- assign posts = site.posts | where: "lang", lang -%}
 
-<section class="hero">
-  <div class="shell">
-    <p class="eyebrow">{{ site.author }} &middot; {{ site.author_handle }}</p>
-    <h1 class="hero-title">{{ t.title }}</h1>
-    <p class="hero-sub">{{ t.tagline }}</p>
-    {%- if content != empty %}
-    <div class="hero-lede">{{ content }}</div>
-    {%- endif %}
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#writing">{{ t.hero_cta }}</a>
-    </div>
-  </div>
+<section class="intro">
+  <h1>{{ t.title }}</h1>
+  <p class="tagline">{{ t.tagline }}</p>
+  {%- if content != empty %}
+  {{ content }}
+  {%- endif %}
 </section>
 
-<section id="writing" class="section">
-  <div class="shell">
-    <div class="section-head">
-      <h2 class="section-heading">{{ t.section_writing }}</h2>
-      <span class="count">{{ posts.size }} {{ t.post_word }}</span>
-    </div>
-
-    <ul class="card-list">
-      {%- for post in posts %}
-      <li class="card">
-        <p class="card-meta">
-          <time datetime="{{ post.date | date_to_xmlschema }}">{% include localized-date.html date=post.date lang=lang %}</time>
-          {%- if post.categories.size > 0 %}
-          <span class="dot" aria-hidden="true">/</span>
-          <span>{{ post.categories | join: ', ' }}</span>
-          {%- endif %}
-        </p>
-        <h3 class="card-title">
-          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h3>
-        {%- assign summary = post.description | default: post.excerpt | strip_html | normalize_whitespace -%}
-        {%- if summary != "" %}
-        <p class="card-excerpt">{{ summary | truncate: 220 }}</p>
-        {%- endif %}
-        {%- if post.tags.size > 0 %}
-        <p class="tags">{% for tag in post.tags limit: 4 %}<span class="tag">{{ tag }}</span>{% endfor %}</p>
-        {%- endif %}
-        <span class="card-cta" aria-hidden="true">{{ t.read }} &rarr;</span>
-      </li>
-      {%- else %}
-      <li class="card muted">{{ t.no_posts }}</li>
-      {%- endfor %}
-    </ul>
-  </div>
+<section aria-labelledby="writing">
+  <h2 id="writing" class="label">{{ t.section_writing }}</h2>
+  <ul class="post-list">
+    {%- for post in posts %}
+    <li>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+      <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    </li>
+    {%- else %}
+    <li>{{ t.no_posts }}</li>
+    {%- endfor %}
+  </ul>
 </section>
-
-{%- assign all_tags = posts | map: "tags" | join: "," | split: "," | uniq | sort -%}
-{%- if all_tags.size > 0 %}
-<section class="section">
-  <div class="shell">
-    <h2 class="section-heading">{{ t.section_topics }}</h2>
-    <ul class="topic-list">
-      {%- for tag in all_tags %}
-      {%- assign n = posts | where_exp: "p", "p.tags contains tag" | size -%}
-      <li><span class="topic">{{ tag }}<span class="topic-count">{{ n }}</span></span></li>
-      {%- endfor %}
-    </ul>
-  </div>
-</section>
-{%- endif %}
