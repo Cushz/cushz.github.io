@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------
    Exploitation Diaries
    A nod to 2000s underground sites and ezines: terminal banner,
-   bracketed links, boxed sections, Code:/Quote: blocks, 88x31 badges.
+   bracketed links, boxed sections, Code:/Quote: blocks.
    Colours are deliberately quiet: charcoal, not black; off-white text,
    not neon; one soft blue for links and a warm sand accent. Nothing
    glows. The only animation is the banner cursor, and it stops for
@@ -351,26 +351,7 @@ pre code { background: none; border: 0; padding: 0; font-size: inherit; color: i
   color: var(--muted);
 }
 
-.site-footer p { margin: 0.75rem 0 0; }
-
-/* 88x31-style web badges */
-.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; }
-
-.badge {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 88px;
-  height: 31px;
-  border: 1px solid var(--border);
-  background: var(--box-alt);
-  font-size: 0.6rem;
-  line-height: 1.15;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.badge b { color: var(--accent); font-size: 0.68rem; }
+.site-footer p { margin: 0; }
 
 /* ---------- small screens ---------- */
 
