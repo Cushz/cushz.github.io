@@ -6,28 +6,27 @@ layout: default
 {%- assign home_url = "/" -%}{%- if lang == "en" -%}{%- assign home_url = "/en/" -%}{%- endif -%}
 {%- assign minutes = content | number_of_words | divided_by: 200 | at_least: 1 -%}
 
-<p class="crumbs"><a href="{{ home_url | relative_url }}">{{ t.nav_index }}</a>{% if page.categories.size > 0 %} &raquo; {{ page.categories | join: ', ' }}{% endif %}</p>
+<p class="back"><a href="{{ home_url | relative_url }}">&laquo; {{ t.back_all }}</a></p>
 
 <article class="box">
-  <h1 class="bar topic-bar">{{ page.title | escape }}</h1>
-  <div class="post-row">
-    {% include userpanel.html lang=lang %}
-    <div class="post-body">
-      <p class="post-meta">
-        {{ t.posted }}: <time datetime="{{ page.date | date_to_xmlschema }}">{% include localized-date.html date=page.date lang=lang %}</time>
-        :: {{ minutes }} {{ t.min_read }}
-      </p>
+  <header class="post-header">
+    <h1>{{ page.title | escape }}</h1>
+    <p class="meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{% include localized-date.html date=page.date lang=lang %}</time>
+      {%- if page.categories.size > 0 %} :: {{ page.categories | join: ', ' }}{% endif %} :: {{ minutes }} {{ t.min_read }}
+    </p>
+  </header>
 
-      <div class="content">
-        {{ content }}
-      </div>
+  <div class="box-body">
+    <div class="content">
+      {{ content }}
+    </div>
 
-      <div class="signature">
-        <p>-- <br>{{ site.author_handle }} :: {{ t.tagline }}</p>
-        {%- if page.canonical_url %}
-        <p>{{ t.originally_published_pre }} <a href="{{ page.canonical_url }}" rel="noopener">Medium</a>{% if t.originally_published_post != "" %} {{ t.originally_published_post }}{% else %}.{% endif %}</p>
-        {%- endif %}
-      </div>
+    <div class="signature">
+      <p>-- <br>{{ site.author_handle }} :: {{ t.tagline }}</p>
+      {%- if page.canonical_url %}
+      <p>{{ t.originally_published_pre }} <a href="{{ page.canonical_url }}" rel="noopener">Medium</a>{% if t.originally_published_post != "" %} {{ t.originally_published_post }}{% else %}.{% endif %}</p>
+      {%- endif %}
     </div>
   </div>
 </article>

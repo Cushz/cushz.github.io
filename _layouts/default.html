@@ -10,14 +10,13 @@
   {%- if sibling -%}{%- assign alt_url = sibling.url -%}{%- endif -%}
 {%- endif -%}
 {%- unless alt_url -%}{%- if alt_lang == "en" -%}{%- assign alt_url = "/en/" -%}{%- else -%}{%- assign alt_url = "/" -%}{%- endif -%}{%- endunless -%}
-{%- assign latest = site.posts | where: "lang", lang | first -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <title>{% if page.title %}{{ page.title | strip_html }} — {{ t.title }}{% else %}{{ t.title }} :: {{ t.nav_index }}{% endif %}</title>
+  <title>{% if page.title %}{{ page.title | strip_html }} — {{ t.title }}{% else %}{{ t.title }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: t.description | strip_html | normalize_whitespace | truncate: 160 }}">
   {%- if page.canonical_url %}
   <link rel="canonical" href="{{ page.canonical_url }}">
@@ -34,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans:ital,wght@0,400;0,700;1,400&family=VT323&display=swap">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23050705'/><path d='M8 10l6 6-6 6M16 22h8' fill='none' stroke='%2366d966' stroke-width='3'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2316181a'/><path d='M8 10l6 6-6 6M16 22h8' fill='none' stroke='%23d7b06a' stroke-width='3'/></svg>">
 </head>
 <body>
   <a class="skip-link" href="#main">{{ t.skip }}</a>
@@ -46,9 +45,9 @@
       <p class="banner-tag">[ {{ t.tagline }} ]</p>
     </header>
 
-    <nav class="navbar" aria-label="{{ t.nav_index }}">
+    <nav class="navbar" aria-label="{{ t.section_writing }}">
       <div class="nav-links">
-        <a href="{{ home_url | relative_url }}">{{ t.nav_index }}</a>
+        <a href="{{ home_url | relative_url }}">{{ t.section_writing }}</a>
         <a href="{{ site.portfolio_url }}" rel="noopener">Portfolio</a>
         <a href="https://github.com/{{ site.github_username }}" rel="me noopener">GitHub</a>
         <a href="{{ site.medium_url }}" rel="me noopener">Medium</a>
@@ -59,12 +58,6 @@
       </div>
     </nav>
 
-    <div class="welcome">
-      <span>{{ t.welcome }}</span>
-      {%- if latest %}
-      <span>{{ t.last_post }}: {% include localized-date.html date=latest.date lang=lang %}</span>
-      {%- endif %}
-    </div>
 
     <main id="main">
       {{ content }}

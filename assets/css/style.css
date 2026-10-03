@@ -1,35 +1,34 @@
 /* ------------------------------------------------------------------
    Exploitation Diaries
-   A 2000s hacking-forum skin: phpBB-style boxes and topic tables on a
-   near-black page, terminal-green accents. Text is a soft grey-green,
-   not pure green, so long posts stay comfortable to read.
-   The only animation is the blinking cursor in the banner, and it is
-   switched off for people who ask for reduced motion.
+   A nod to 2000s underground sites and ezines: terminal banner,
+   bracketed links, boxed sections, Code:/Quote: blocks, 88x31 badges.
+   Colours are deliberately quiet: charcoal, not black; off-white text,
+   not neon; one soft blue for links and a warm sand accent. Nothing
+   glows. The only animation is the banner cursor, and it stops for
+   people who ask for reduced motion.
    ------------------------------------------------------------------ */
 
 :root {
-  --page:    #070907;  /* outside the forum frame        */
-  --frame:   #0d100d;  /* forum background               */
-  --row:     #121612;  /* table rows, post body          */
-  --row-alt: #161b16;  /* alternating rows, user panel   */
-  --bar-1:   #1f2e1f;  /* title-bar gradient             */
-  --bar-2:   #142014;
-  --border:  #2a352a;
-  --text:    #c4cdc3;  /* prose                          */
-  --bright:  #e4ebe3;  /* headings                       */
-  --muted:   #7f8d7e;  /* meta, small print              */
-  --green:   #66d966;  /* links, logo                    */
-  --green-hi:#a6f5a6;  /* link hover                     */
-  --amber:   #e3b341;  /* rank, NEW badge                */
-  --code-bg: #050705;
+  --page:    #111214;  /* outside the frame              */
+  --frame:   #17191c;  /* frame background               */
+  --box:     #1c1f23;  /* section boxes                  */
+  --box-alt: #22262b;  /* bars, quote/code headers       */
+  --border:  #30353b;
+  --text:    #d2d4d0;  /* prose                          */
+  --bright:  #ecebe6;  /* headings                       */
+  --muted:   #8c9198;  /* meta, small print              */
+  --link:    #93b7d8;  /* soft steel blue                */
+  --link-hi: #c3d8ec;
+  --accent:  #d7b06a;  /* warm sand: logo, numbers       */
+  --code-bg: #141619;
 
-  /* syntax — on --code-bg */
-  --sx-comment: #6d7d6c;
-  --sx-keyword: #ff7b72;
-  --sx-string:  #a5d6a7;
-  --sx-number:  #79c0ff;
-  --sx-func:    #d2a8ff;
-  --sx-type:    #ffa657;
+  /* syntax — muted so code blocks don't shout */
+  --sx-comment: #7a8088;
+  --sx-keyword: #d98e8e;
+  --sx-string:  #a9c7a0;
+  --sx-number:  #c7a8d9;
+  --sx-func:    #93b7d8;
+  --sx-type:    #d7b06a;
 
   /* all three cover the full Azerbaijani alphabet (Ə ə Ğ ğ I ı İ Ş ş …) */
   --sans:  "Noto Sans", Verdana, Tahoma, sans-serif;
@@ -47,25 +46,24 @@ body {
   color: var(--text);
   font-family: var(--sans);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.75;
   overflow-wrap: break-word;
 }
 
-::selection { background: #2f6b2f; color: #fff; }
+::selection { background: #3a4a5c; color: #fff; }
 
-a { color: var(--green); text-decoration: none; }
-a:hover { color: var(--green-hi); text-decoration: underline; }
-a:focus-visible { outline: 1px dashed var(--green); outline-offset: 2px; }
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hi); text-decoration: underline; }
+a:focus-visible { outline: 1px dashed var(--link); outline-offset: 2px; }
 
 .skip-link { position: absolute; left: -9999px; }
-.skip-link:focus { left: 1rem; top: 1rem; z-index: 5; padding: 0.3rem 0.7rem; background: var(--green); color: #000; }
+.skip-link:focus { left: 1rem; top: 1rem; z-index: 5; padding: 0.3rem 0.7rem; background: var(--bright); color: var(--page); }
 
 /* ---------- frame ---------- */
 
 .forum {
-  max-width: 64rem;
-  margin: 1.25rem auto;
-  padding: 0 0 0.5rem;
+  max-width: 54rem;
+  margin: 1.5rem auto;
   background: var(--frame);
   border: 1px solid var(--border);
 }
@@ -73,15 +71,13 @@ a:focus-visible { outline: 1px dashed var(--green); outline-offset: 2px; }
 /* ---------- banner ---------- */
 
 .banner {
-  padding: 1.5rem 1.5rem 1.25rem;
+  padding: 1.6rem 1.75rem 1.3rem;
   border-bottom: 1px solid var(--border);
-  background:
-    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.25) 0 1px, transparent 1px 3px),
-    linear-gradient(180deg, #102010, #0a120a);
+  background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.18) 0 1px, transparent 1px 3px);
 }
 
 .prompt {
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.3rem;
   font-family: var(--mono);
   font-size: 0.75rem;
   color: var(--muted);
@@ -90,15 +86,14 @@ a:focus-visible { outline: 1px dashed var(--green); outline-offset: 2px; }
 .logo {
   display: inline-block;
   font-family: var(--term);
-  font-size: 3.25rem;
+  font-size: 3.1rem;
   line-height: 1;
-  color: var(--green);
-  text-shadow: 0 0 8px rgb(102 217 102 / 0.35);
+  color: var(--bright);
 }
 
-.logo:hover { color: var(--green); text-decoration: none; }
+.logo:hover { color: var(--bright); text-decoration: none; }
 
-.cursor { animation: blink 1s steps(1) infinite; }
+.cursor { color: var(--accent); animation: blink 1s steps(1) infinite; }
 
 @keyframes blink { 50% { opacity: 0; } }
 
@@ -107,13 +102,13 @@ a:focus-visible { outline: 1px dashed var(--green); outline-offset: 2px; }
 }
 
 .banner-tag {
-  margin: 0.4rem 0 0;
+  margin: 0.45rem 0 0;
   font-family: var(--mono);
   font-size: 0.8rem;
   color: var(--muted);
 }
 
-/* ---------- navbar & welcome strip ---------- */
+/* ---------- navbar ---------- */
 
 .navbar {
   display: flex;
@@ -121,8 +116,8 @@ a:focus-visible { outline: 1px dashed var(--green); outline-offset: 2px; }
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem 1rem;
-  padding: 0.45rem 1.5rem;
-  background: linear-gradient(180deg, var(--bar-1), var(--bar-2));
+  padding: 0.5rem 1.75rem;
+  background: var(--box-alt);
   border-bottom: 1px solid var(--border);
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -134,220 +129,123 @@ a:focus-visible { outline: 1px dashed var(--green); outline-offset: 2px; }
 
 .nav-lang { display: inline-flex; border: 1px solid var(--border); }
 .nav-lang > * { padding: 0 0.5rem; }
-.nav-lang > span { background: var(--green); color: #000; font-weight: 600; }
+.nav-lang > span { background: var(--bright); color: var(--page); font-weight: 600; }
 .nav-lang > a { color: var(--muted); }
-.nav-lang > a:hover { color: var(--green-hi); background: var(--row-alt); text-decoration: none; }
+.nav-lang > a:hover { color: var(--bright); background: var(--box); text-decoration: none; }
 
-.welcome {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.25rem 1rem;
-  padding: 0.35rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.8rem;
-  color: var(--muted);
-}
-
-main { padding: 0 1.5rem; }
-
-.crumbs {
-  margin: 1.25rem 0 0.75rem;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.crumbs strong { color: var(--text); }
+main { padding: 1.75rem 1.75rem 0.25rem; }
 
 /* ---------- boxes ---------- */
 
 .box {
-  margin: 0 0 1.25rem;
-  background: var(--row);
+  margin: 0 0 1.75rem;
+  background: var(--box);
   border: 1px solid var(--border);
 }
 
 .bar {
   margin: 0;
-  padding: 0.4rem 0.9rem;
-  background: linear-gradient(180deg, var(--bar-1), var(--bar-2));
+  padding: 0.45rem 1rem;
+  background: var(--box-alt);
   border-bottom: 1px solid var(--border);
   font-family: var(--mono);
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--green);
+  color: var(--bright);
 }
 
-.topic-bar {
-  padding: 0.75rem 1rem;
-  font-family: var(--sans);
-  font-size: 1.45rem;
+.bar span { color: var(--muted); font-weight: 400; }
+
+.box-body { padding: 1.25rem 1.4rem 1.4rem; }
+
+/* ---------- about ---------- */
+
+.handle {
+  margin: 0 0 0.6rem !important;
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.handle span { color: var(--muted); font-weight: 400; }
+
+.about p { margin: 0 0 0.9rem; }
+.about p:last-child { margin-bottom: 0; }
+
+/* ---------- ezine-style index ---------- */
+
+.index { list-style: none; margin: 0; padding: 0; }
+
+.index li {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  gap: 0 0.75rem;
+  padding: 1.1rem 1.4rem;
+}
+
+.index li + li { border-top: 1px dashed var(--border); }
+
+.index-no {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1.75rem;
+  color: var(--accent);
+}
+
+.index-title { font-size: 1.1rem; font-weight: 700; line-height: 1.45; color: var(--bright); }
+.index-title:hover { color: var(--link-hi); }
+
+.index-desc { margin: 0.3rem 0 0.35rem; font-size: 0.92rem; line-height: 1.6; }
+
+.meta {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* ---------- post ---------- */
+
+.back { margin: 0 0 1rem; font-family: var(--mono); font-size: 0.8rem; }
+.box + .back { margin-top: -0.5rem; }
+
+.post-header {
+  padding: 1.4rem 1.4rem 1.1rem;
+  background: var(--box-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.post-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
   line-height: 1.3;
   color: var(--bright);
 }
 
-.stats { margin: 0; padding: 0.7rem 0.9rem; font-size: 0.9rem; }
-.stats strong { color: var(--bright); }
-
-/* ---------- post row: user panel + body ---------- */
-
-.post-row {
-  display: grid;
-  grid-template-columns: 10.5rem minmax(0, 1fr);
-}
-
-.user {
-  padding: 1rem 0.9rem;
-  background: var(--row-alt);
-  border-right: 1px solid var(--border);
-  font-size: 0.8rem;
-  text-align: center;
-}
-
-.avatar {
-  width: 4.5rem;
-  height: 4.5rem;
-  margin: 0 auto 0.6rem;
-  display: grid;
-  place-items: center;
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  font-family: var(--term);
-  font-size: 2.25rem;
-  color: var(--green);
-}
-
-.user p { margin: 0; }
-.user-name { font-family: var(--mono); font-weight: 600; font-size: 0.95rem; color: var(--green); }
-.user-rank { color: var(--amber); }
-.user-pips { color: var(--amber); letter-spacing: 0.1em; font-size: 0.7rem; }
-
-.user-stats {
-  margin: 0.75rem 0 0;
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-content: center;
-  gap: 0 0.4rem;
-  color: var(--muted);
-  text-align: left;
-}
-
-.user-stats dd { margin: 0; color: var(--text); }
-
-.post-body { padding: 1.1rem 1.4rem 1.4rem; }
-
-.intro p { margin: 0 0 0.9rem; }
-.intro p:last-child { margin-bottom: 0; }
-.intro strong { color: var(--green); }
-
-.post-meta {
-  margin: 0 0 1.5rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px dashed var(--border);
-  font-size: 0.8rem;
-  color: var(--muted);
-}
-
-.signature {
-  margin-top: 2.5rem;
-  padding-top: 0.75rem;
-  border-top: 1px dashed var(--border);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-.signature p { margin: 0 0 0.5rem; }
-
-.back { margin: 0 0 1.25rem; font-size: 0.9rem; }
-
-/* ---------- topic table ---------- */
-
-.topics { width: 100%; border-collapse: collapse; }
-
-.topics th {
-  padding: 0.4rem 0.75rem;
-  background: linear-gradient(180deg, var(--bar-1), var(--bar-2));
-  border-bottom: 1px solid var(--border);
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--green);
-  text-align: left;
-  white-space: nowrap;
-}
-
-.topics td {
-  padding: 0.8rem 0.75rem;
-  border-bottom: 1px solid var(--border);
-  vertical-align: top;
-  font-size: 0.85rem;
-}
-
-.topics tbody tr:nth-child(even) td { background: var(--row-alt); }
-.topics tbody tr:last-child td { border-bottom: 0; }
-
-.topic-icon { width: 2rem; padding-right: 0 !important; }
-
-.folder {
-  display: block;
-  width: 14px;
-  height: 11px;
-  margin-top: 0.4rem;
-  border: 1px solid var(--muted);
-  border-top-width: 3px;
-}
-
-.folder-new { border-color: var(--amber); background: rgb(227 179 65 / 0.25); }
-
-.topic-title { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
-
-.topic-desc { display: block; margin-top: 0.25rem; color: var(--text); line-height: 1.55; }
-.topic-cat  { display: block; margin-top: 0.3rem; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
-
-.new {
-  display: inline-block;
-  margin-right: 0.3rem;
-  padding: 0 0.3rem;
-  background: var(--amber);
-  color: #000;
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  font-weight: 600;
-  vertical-align: 0.2em;
-}
-
-.col-sm { white-space: nowrap; color: var(--muted); }
-.topic-author { color: var(--green); font-family: var(--mono); }
-
-/* ---------- post content ---------- */
-
-.content { max-width: 46rem; }
+.content { max-width: 44rem; }
 .content > *:first-child { margin-top: 0; }
 
 .content h2, .content h3, .content h4 { color: var(--bright); line-height: 1.35; }
-.content h2 { font-size: 1.35rem; margin: 2.5rem 0 0.8rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+.content h2 { font-size: 1.35rem; margin: 2.5rem 0 0.8rem; padding-bottom: 0.3rem; border-bottom: 1px dashed var(--border); }
 .content h3 { font-size: 1.15rem; margin: 2rem 0 0.7rem; }
 .content h4 { font-size: 1rem;    margin: 1.75rem 0 0.6rem; }
 
-.content h2::before { content: "# "; color: var(--green); font-family: var(--mono); }
+.content h2::before { content: "# "; color: var(--accent); font-family: var(--mono); font-weight: 400; }
 
 .content p, .content ul, .content ol { margin: 0 0 1.2rem; }
 .content ul, .content ol { padding-left: 1.4rem; }
 .content li { margin-bottom: 0.35rem; }
-.content li::marker { color: var(--green); }
+.content li::marker { color: var(--muted); }
 
 .content strong { color: var(--bright); }
-.content a { text-decoration: underline; text-decoration-color: rgb(102 217 102 / 0.4); text-underline-offset: 0.15em; }
+.content a { text-decoration: underline; text-decoration-color: rgb(147 183 216 / 0.4); text-underline-offset: 0.15em; }
 
-/* forum "Quote:" box */
 .content blockquote {
   margin: 1.5rem 0;
   padding: 0.8rem 1rem;
-  background: var(--row-alt);
+  background: var(--frame);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--green);
+  border-left: 3px solid var(--muted);
   font-size: 0.95rem;
 }
 
@@ -386,7 +284,19 @@ main { padding: 0 1.5rem; }
 
 .content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
 .content th, .content td { border: 1px solid var(--border); padding: 0.4rem 0.7rem; text-align: left; }
-.content th { background: var(--row-alt); color: var(--bright); }
+.content th { background: var(--box-alt); color: var(--bright); }
+
+.signature {
+  margin-top: 2.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.signature p { margin: 0 0 0.5rem; }
 
 /* ---------- code ---------- */
 
@@ -397,17 +307,16 @@ code, kbd, samp, pre { font-family: var(--mono); }
   background: var(--code-bg);
   border: 1px solid var(--border);
   font-size: 0.85em;
-  color: var(--green-hi);
+  color: var(--bright);
 }
 
-/* forum "Code:" box */
 div.highlighter-rouge { margin: 1.5rem 0; border: 1px solid var(--border); background: var(--code-bg); }
 
 div.highlighter-rouge::before {
   content: "Code:";
   display: block;
   padding: 0.2rem 0.75rem;
-  background: var(--row-alt);
+  background: var(--box-alt);
   border-bottom: 1px solid var(--border);
   font-size: 0.75rem;
   font-weight: 600;
@@ -422,26 +331,26 @@ div.highlighter-rouge::before {
   overflow-x: auto;
   font-size: 0.8rem;
   line-height: 1.6;
-  color: #d6e0d5;
+  color: var(--text);
 }
 
 pre code { background: none; border: 0; padding: 0; font-size: inherit; color: inherit; }
 
 .highlight .c, .highlight .c1, .highlight .cm, .highlight .cs { color: var(--sx-comment); font-style: italic; }
-.highlight .cp, .highlight .cpf { color: var(--sx-func); }
+.highlight .cp, .highlight .cpf { color: var(--sx-number); }
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kr, .highlight .kc { color: var(--sx-keyword); }
 .highlight .kt { color: var(--sx-type); }
 .highlight .s, .highlight .s1, .highlight .s2, .highlight .sc, .highlight .se, .highlight .sb { color: var(--sx-string); }
 .highlight .m, .highlight .mi, .highlight .mh, .highlight .mf, .highlight .mo, .highlight .no { color: var(--sx-number); }
 .highlight .nf, .highlight .nb { color: var(--sx-func); }
-.highlight .nt, .highlight .gi { color: #7ee787; }
-.highlight .err, .highlight .gd { color: #ffa198; }
+.highlight .nt, .highlight .gi { color: var(--sx-string); }
+.highlight .err, .highlight .gd { color: var(--sx-keyword); }
 
 /* ---------- footer ---------- */
 
 .site-footer {
-  margin: 0.5rem 1.5rem 0;
-  padding: 1rem 0 0.75rem;
+  margin: 0 1.75rem;
+  padding: 1rem 0 1.1rem;
   border-top: 1px solid var(--border);
   text-align: center;
   font-family: var(--mono);
@@ -460,43 +369,25 @@ pre code { background: none; border: 0; padding: 0; font-size: inherit; color: i
   justify-content: center;
   width: 88px;
   height: 31px;
-  border: 1px solid var(--muted);
-  background: linear-gradient(180deg, #1b241b, #0b100b);
+  border: 1px solid var(--border);
+  background: var(--box-alt);
   font-size: 0.6rem;
   line-height: 1.15;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-.badge b { color: var(--green); font-size: 0.68rem; }
+.badge b { color: var(--accent); font-size: 0.68rem; }
 
 /* ---------- small screens ---------- */
 
 @media (max-width: 44rem) {
   .forum { margin: 0; border-width: 0 0 1px; }
-  .banner, .navbar, .welcome { padding-inline: 1rem; }
-  main { padding: 0 0.75rem; }
+  .banner, .navbar { padding-inline: 1rem; }
+  main { padding: 1.25rem 0.75rem 0.25rem; }
   .site-footer { margin-inline: 0.75rem; }
   .logo { font-size: 2.4rem; }
-
-  .post-row { grid-template-columns: 1fr; }
-  .user {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto auto;
-    column-gap: 0.75rem;
-    align-items: center;
-    padding: 0.7rem 0.9rem;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-    text-align: left;
-  }
-  .avatar { grid-row: 1 / 4; width: 3rem; height: 3rem; margin: 0; font-size: 1.5rem; }
-  .user-pips { display: none; }
-  .user-stats { margin: 0; justify-content: start; grid-template-columns: auto auto auto auto; }
-  .post-body { padding: 1rem; }
-  .topic-bar { font-size: 1.25rem; }
-
-  .topics thead, .topics .col-sm, .topics .topic-icon { display: none; }
-  .topics td { display: block; }
+  .box-body, .post-header { padding-inline: 1rem; }
+  .post-header h1 { font-size: 1.45rem; }
+  .index li { grid-template-columns: 1fr; padding-inline: 1rem; }
 }
