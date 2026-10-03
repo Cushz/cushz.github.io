@@ -1,8 +1,8 @@
 ---
 layout: home
-lang: az
+lang: en
 permalink: /
-alt_url: /en/
+alt_url: /az/
 ---
 
 Vulnerability researcher · Reverse engineer

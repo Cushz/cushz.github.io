@@ -3,7 +3,7 @@ layout: default
 ---
 {%- assign lang = page.lang | default: site.lang -%}
 {%- assign t = site.data.i18n[lang] -%}
-{%- assign home_url = "/" -%}{%- if lang == "en" -%}{%- assign home_url = "/en/" -%}{%- endif -%}
+{%- assign home_url = "/" -%}{%- if lang == "az" -%}{%- assign home_url = "/az/" -%}{%- endif -%}
 {%- assign minutes = content | number_of_words | divided_by: 200 | at_least: 1 -%}
 
 <p class="back"><a href="{{ home_url | relative_url }}">&laquo; {{ t.back_all }}</a></p>

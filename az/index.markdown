@@ -1,7 +1,7 @@
 ---
 layout: home
-lang: en
-permalink: /en/
+lang: az
+permalink: /az/
 alt_url: /
 ---
 

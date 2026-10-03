@@ -2,14 +2,14 @@
 {%- assign t = site.data.i18n[lang] -%}
 {%- assign alt_lang = "en" -%}{%- if lang == "en" -%}{%- assign alt_lang = "az" -%}{%- endif -%}
 {%- assign alt_t = site.data.i18n[alt_lang] -%}
-{%- assign home_url = "/" -%}{%- if lang == "en" -%}{%- assign home_url = "/en/" -%}{%- endif -%}
+{%- assign home_url = "/" -%}{%- if lang == "az" -%}{%- assign home_url = "/az/" -%}{%- endif -%}
 {%- comment -%} counterpart page in the other language {%- endcomment -%}
 {%- assign alt_url = page.alt_url -%}
 {%- if page.ref -%}
   {%- assign sibling = site.posts | where: "ref", page.ref | where_exp: "p", "p.lang != page.lang" | first -%}
   {%- if sibling -%}{%- assign alt_url = sibling.url -%}{%- endif -%}
 {%- endif -%}
-{%- unless alt_url -%}{%- if alt_lang == "en" -%}{%- assign alt_url = "/en/" -%}{%- else -%}{%- assign alt_url = "/" -%}{%- endif -%}{%- endunless -%}
+{%- unless alt_url -%}{%- if alt_lang == "az" -%}{%- assign alt_url = "/az/" -%}{%- else -%}{%- assign alt_url = "/" -%}{%- endif -%}{%- endunless -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
@@ -40,7 +40,6 @@
 
   <div class="forum">
     <header class="banner">
-      <p class="prompt">root@{{ site.author_handle }}:~# ./exploitation_diaries --lang={{ lang }}</p>
       <a class="logo" href="{{ home_url | relative_url }}">{{ t.title }}<span class="cursor" aria-hidden="true">_</span></a>
       <p class="banner-tag">[ {{ t.tagline }} ]</p>
     </header>
@@ -48,7 +47,6 @@
     <nav class="navbar" aria-label="{{ t.section_writing }}">
       <div class="nav-links">
         <a href="{{ home_url | relative_url }}">{{ t.section_writing }}</a>
-        <a href="{{ site.portfolio_url }}" rel="noopener">Portfolio</a>
         <a href="https://github.com/{{ site.github_username }}" rel="me noopener">GitHub</a>
         <a href="{{ site.medium_url }}" rel="me noopener">Medium</a>
       </div>

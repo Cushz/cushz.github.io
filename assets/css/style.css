@@ -76,13 +76,6 @@ a:focus-visible { outline: 1px dashed var(--link); outline-offset: 2px; }
   background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.18) 0 1px, transparent 1px 3px);
 }
 
-.prompt {
-  margin: 0 0 0.3rem;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-
 .logo {
   display: inline-block;
   font-family: var(--term);
